@@ -1,10 +1,19 @@
 import React, { use, useState } from 'react';
 import Country from './Country';
+import Chart from './Chart';
+import Count from './Count';
+import { ChartColumn } from 'lucide-react';
 
 
 const Countries = ({ dataPromise }) => {
     const [visited, setVisited] = useState([]);
     const [active, setActive] = useState('all');
+    const [chart, setChart] = useState(false)
+
+    const displayChart = () => {
+        const newChart = !chart;
+        setChart(newChart)
+    }
 
     const data = use(dataPromise);
     const countries = data.data.countries;
@@ -36,6 +45,11 @@ const Countries = ({ dataPromise }) => {
     return (
         <div>
             <p className='text-4xl font-semibold text-center mt-5'>Total Countries: {countries.length}</p>
+            <div className='fixed bg-gray-200 p-2 rounded-full ml-5 mt-70 shadow-md hover:shadow-[0_0_15px_rgba(59,130,246,0.7)] transition-all duration-300 ease-in-out hover:scale-110' onClick={displayChart}><ChartColumn></ChartColumn></div>
+            <Count countries={countries} visited={visited} notVisited={notVisited}></Count>
+            {
+                chart && <Chart countries={visited}></Chart>
+            }
             <div className='flex gap-2 justify-center mt-2'>
                 <div className={`p-3 rounded-lg text-white ${active === 'all' ? 'bg-blue-500' : 'bg-gray-500'}`} onClick={() => setActive('all')}>All Countries</div>
                 <div className={`p-3 rounded-lg text-white ${active === 'visited' ? 'bg-blue-500' : 'bg-gray-500'}`} onClick={() => setActive('visited')}>Visited Countries</div>

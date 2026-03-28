@@ -8,10 +8,10 @@ const Country = ({ country, state, isVisited }) => {
     }
 
     return (
-        <div className='border-2 border-gray-400 rounded-lg p-5 bg-gray-200'>
+        <div className='border-2 border-gray-400 rounded-lg p-5 bg-gray-200 flex flex-col'>
             <div className='h-40'><img src={`${country.flags.flags.png}`} alt={`${country.flags.flags.alt}`} className='rounded-lg w-full h-full' /></div>
-            <div>
-                <p className='text-lg font-semibold'>{country.name.common}</p>
+            <div className='flex-1'>
+                <p className='text-lg font-semibold'>{country.name.common} {country.name.common === 'Israel' && '(STOLEN LAND)'}</p>
                 <p className='text-md font-medium'>{country.capital.capital}</p>
                 <p className='text-md font-medium'>{country.population.population}</p>
             </div>
