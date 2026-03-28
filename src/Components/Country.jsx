@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Country = ({ country }) => {
-    const [visited, setVisited] = useState(false);
-    const handleVisited = () => setVisited(!visited);
+
+const Country = ({ country, state, isVisited }) => {
+
+    const handleVisited = () => {
+        state(country, !isVisited);
+    }
 
     return (
         <div className='border-2 border-gray-400 rounded-lg p-5 bg-gray-200'>
@@ -12,7 +15,7 @@ const Country = ({ country }) => {
                 <p className='text-md font-medium'>{country.capital.capital}</p>
                 <p className='text-md font-medium'>{country.population.population}</p>
             </div>
-            <div className={`rounded-md text-white text-center mt-1.5 p-1 ${visited ? 'bg-blue-500' : 'bg-black'}`} onClick={handleVisited}>{visited ? "Visited" : "Not Visited"}</div>
+            <div className={`rounded-md text-white text-center mt-1.5 p-1 ${isVisited ? 'bg-blue-500' : 'bg-black'}`} onClick={handleVisited}>{isVisited ? "Visited" : "Not Visited"}</div>
         </div>
     );
 };
